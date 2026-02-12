@@ -12,7 +12,7 @@ class Author:
         return [contract.book for contract in self.contracts()]
     
     def sign_contract(self, book, date, royalties):
-        Contract(self, book, date, royalties)
+        return Contract(self, book, date, royalties)
 
     def total_royalties(self):
         return sum([contract.royalties for contract in self.contracts()])
@@ -51,5 +51,6 @@ class Contract:
         self.royalties = royalties
         Contract.all.append(self)
 
-    def contracts_by_date(self, date):
+    @staticmethod
+    def contracts_by_date(cls, date):
         return [contract for contract in Contract.all if contract.date == date]
