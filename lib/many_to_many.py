@@ -11,7 +11,7 @@ class Author:
     def books(self):
         return [contract.book for contract in self.contracts()]
     
-    def sign_contracts(self, book, date, royalties):
+    def sign_contract(self, book, date, royalties):
         Contract(self, book, date, royalties)
 
     def total_royalties(self):
@@ -36,6 +36,15 @@ class Contract:
     all = []
 
     def __init__(self, author, book, date, royalties):
+        if not isinstance(author, Author):
+            raise Exception("author must be of type Author")
+        if not isinstance(book, Book):
+            raise Exception("book must be of type Book")
+        if not isinstance(date, str):
+            raise Exception("date must be of type str")
+        if not isinstance(royalties, int):
+            raise Exception("royalties must be of type int")
+        
         self.author = author
         self.book = book
         self.date = date
